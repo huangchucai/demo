@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>苹果轮播</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div class="ct">
+    <h1 class="normal">Apple-like Gallery<br>
+    <b>Slideshow</b>
+    </h1>
+    <h2>View the <a href="#">original tutorial »</a></h2>
+    <div class="content">
+        <div class="carousel">
+            <ul class="carousel-ul">
+                <li><img src="img/macbook.jpg" alt=""></li>
+                <li><img src="img/iphone.jpg" alt=""></li>
+                <li><img src="img/imac.jpg" alt=""></li>
+                <li><img src="img/info.jpg" alt=""></li>
+            </ul>
+        </div>
+        <div class="nav">
+            <ul>
+                <li style="width: 2px;"><a href="javascript:;"></a></li>
+                <li class="active item"><a href="javascript:;"><img src="img/thumb_macbook.png" alt=""></a></li>
+                <li class="item"><a href="javascript:;"><img src="img/thumb_iphone.png" alt=""></a></li>
+                <li class="item"><a href="javascript:;"><img src="img/thumb_imac.png" alt=""></a></li>
+                <li class="item"><a href="javascript:;"><img src="img/thumb_about.png" alt=""></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<p>This is a tutorialzine demo. View the <a href="#">original tutorial </a>  to read and download the source files.</p>
+<p>The gallery features artwork from  <a href="#">rambocre, pickupjojo</a>  and   <a href="#">codenamebender</a></p>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+    function Carousel($csl){
+        this.$carousel=$csl;
+        this.navLi=this.$carousel.next(".nav").find("li.item");
+        this.$carouselUl=this.$carousel.find(".carousel-ul");
+        this.liWidth=this.$carousel.find("li").eq(0).width()
+        this.ulWidth=this.liWidth*this.$carousel.find("li").length;
+        this.bind();
+    }
+    Carousel.prototype.bind=function(){
+        this.$carouselUl.width(this.ulWidth);
+        var _this=this;
+        this.navLi.on("click",function () {
+            var index=$(this).index()
+            $(this).siblings().removeClass("active")
+            $(this).addClass("active")
+            _this.$carouselUl.animate({
+                left: -_this.liWidth*(index-1)
+            },500)
+        })
+    }
+
+    new Carousel($(".carousel"))
+</script>
+</body>
+</html>
